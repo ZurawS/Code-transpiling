@@ -11,7 +11,7 @@ const App = () => {
   const startService = async () => {
     ref.current = await esbuild.startService({
       worker: true,
-      wasmURL: "/https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm",
+      wasmURL: "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm",
     });
   };
 
@@ -35,10 +35,13 @@ const App = () => {
       },
     });
 
-    // console.log(result.outputFiles[0].text);
-
     setCode(result.outputFiles[0].text);
   };
+
+  const html = `
+  <script>
+    ${code}
+  </script>`;
 
   return (
     <div>
@@ -50,12 +53,9 @@ const App = () => {
         <button onClick={onClick}>Submit</button>
       </div>
       <pre>{code}</pre>
-      <iframe srcDoc={html} />
+      <iframe sandbox="allow-scripts" srcDoc={html} />
     </div>
   );
 };
-
-const html = `
-<h1> Local HTML doc </h1>`;
 
 ReactDOM.render(<App />, document.querySelector("#root"));
