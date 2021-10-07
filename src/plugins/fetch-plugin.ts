@@ -6,11 +6,6 @@ const fileCache = localForage.createInstance({
   name: "fileCache",
 });
 
-const input = `
-import React, {useState} from 'react'
-  console.log(React, useState);
-`;
-
 export const fetchPlugin = (inputCode: string) => {
   return {
     name: "fetch-plugin",
